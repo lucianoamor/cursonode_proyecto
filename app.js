@@ -197,8 +197,8 @@ app.prototype.libs = function () {
     return new Promise((resolve, reject)=> {
 
         self.main.libs = {
-            Movies:  new Movies(self.main),
-            http: http
+            Movies:  new Movies(self.main)
+            // agregar http
         };
 
         resolve(self.main.libs);

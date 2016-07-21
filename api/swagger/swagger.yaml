@@ -27,7 +27,7 @@ paths:
     get:
       tags:
         - movies
-      summary: get movie by id
+      summary: get movie by imdb id
       x-swagger-router-controller: movies.search
       parameters:
         - name: id
