@@ -124,6 +124,8 @@ app.prototype.io = function () {
 
     debug("io...");
 
+    var sockets = [];
+
     return new Promise((resolve, reject)=> {
         var pathName = self.main.config.get('service.pathname');
         debug(pathName + '/socket.io');
@@ -133,7 +135,8 @@ app.prototype.io = function () {
 
 
         io.on('connection', function(socket){
-            console.log('a user connected');
+            console.log('a user connected' + socket.id);
+            sockets.push(socket.id);
 
             socket.on('chat message', function(msg){
                 console.log('message: ' + msg);
@@ -141,6 +144,16 @@ app.prototype.io = function () {
 
             });
 
+            socket.on('search', function(msg, sid){
+                console.log('search: ' + msg);
+                //for (var x in sockets) {
+                    // filtrar el emisor
+                    // if(sockets[x] != sid)
+                    //    sockets[x].emit('search', msg);
+                //}
+                io.emit('search', msg);
+
+            });
 
             socket.on('disconnect', function(){
                 console.log('user disconnected');

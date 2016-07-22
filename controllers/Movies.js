@@ -13,7 +13,9 @@ function Movies(main) {
             debug(".search called");
 
             var title = req.swagger.params.title ? req.swagger.params.title.value : null;
-            var id = req.swagger.params.id ? req.swagger.params.id.value : null;
+            var id    = req.swagger.params.id ? req.swagger.params.id.value : null;
+
+
 
             main.libs.Movies.searchDB({title: title, id: id})
             .then((movies)=>{
@@ -29,6 +31,7 @@ function Movies(main) {
                         }
                         movies.Search.forEach((movie)=>{
                             let movieOk = {name: movie.Title, year: movie.Year, imdbID: movie.imdbID, image: movie.Poster};
+                            movieOk.normal = movieOk.name.toLowerCase();
                             main.libs.Movies.save(movieOk)
                             .then((movies)=>{
                                 res.json(movieOk);

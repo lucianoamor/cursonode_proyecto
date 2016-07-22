@@ -89,10 +89,21 @@ myapp.controller("bodyCtrl", function ($scope, $http, $location) {
     myapp.$scope = $scope;
 
     $scope.search  =function(){
-        if($scope.searchInput.trim()!="")
+        if($scope.searchInput.trim()!="") {
             location.hash="#/search/"+$scope.searchInput;
+            socket.emit('search', $scope.searchInput, sid); // es el socket id
+        }
         else return;
     };
+
+    socket.on('search', function(msg){
+        console.log("search: ", msg);
+        $("#searchmsg").html('Ultima busqueda: <h4><a href="#/search/'+msg+'">'+msg+'</a></h4>');
+        
+        //var p = document.createElement("li");
+        //p.innerHTML = msg;
+        //document.getElementById("chatMessages").appendChild(p);
+    });
 });
 
 myapp.controller("chat", function($scope){
@@ -156,3 +167,5 @@ myapp.controller("home", function ($scope, $http) {
 
 
 });
+
+
