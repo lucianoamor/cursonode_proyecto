@@ -91,7 +91,7 @@ myapp.controller("bodyCtrl", function ($scope, $http, $location) {
     $scope.search  =function(){
         if($scope.searchInput.trim()!="") {
             location.hash="#/search/"+$scope.searchInput;
-            socket.emit('search', $scope.searchInput, sid); // es el socket id
+            socket.emit('search', $scope.searchInput, socket.id);
         }
         else return;
     };

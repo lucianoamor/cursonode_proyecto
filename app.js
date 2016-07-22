@@ -146,11 +146,14 @@ app.prototype.io = function () {
 
             socket.on('search', function(msg, sid){
                 console.log('search: ' + msg);
-                //for (var x in sockets) {
+                /*
+                for (var x in sockets) {
                     // filtrar el emisor
-                    // if(sockets[x] != sid)
-                    //    sockets[x].emit('search', msg);
-                //}
+                    console.log(sockets[x], sid);
+                    if(sockets[x] != sid)
+                        io.sockets[x].emit('search', msg);
+                }
+                */
                 io.emit('search', msg);
 
             });
